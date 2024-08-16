@@ -3,7 +3,7 @@ import io
 
 def process_text(content):
     # 대체할 문자 리스트
-    replace_chars = ['，', '、', '？', '：', '；', '。', '「', '」', '《', '》']
+    replace_chars = ['，', '、', '？', '：', '。', '「', '」', '《', '》']
     
     # 대체할 문자 딕셔너리
     replace_dict = {'教': '敎', '為': '爲', '即': '卽'}
@@ -42,32 +42,14 @@ if st.button('텍스트 처리') and 'content' in locals():
     processed_content = process_text(content)
     
     st.subheader("처리된 텍스트:")
-    st.text_area("처리된 텍스트 (복사하려면 선택하세요):", processed_content, height=200)
-    
-    col1, col2 = st.columns(2)
+    st.text_area("", processed_content, height=200)
     
     # 처리된 텍스트를 다운로드할 수 있게 합니다
-    with col1:
-        output = io.BytesIO()
-        output.write(processed_content.encode('utf-8'))
-        st.download_button(
-            label="처리된 텍스트 다운로드",
-            data=output.getvalue(),
-            file_name="processed_text.txt",
-            mime="text/plain"
-        )
-    
-    # 클립보드에 복사 버튼 (JavaScript 사용)
-    with col2:
-        st.markdown("""
-        <script>
-        function copyToClipboard() {
-            var textArea = document.querySelector('.stTextArea textarea');
-            textArea.select();
-            document.execCommand('copy');
-        }
-        </script>
-        <button onclick="copyToClipboard()">클립보드에 복사</button>
-        """, unsafe_allow_html=True)
-        
-    st.info("처리된 텍스트를 복사하려면 위의 텍스트 영역에서 직접 선택하거나 '클립보드에 복사' 버튼을 클릭하세요.")
+    output = io.BytesIO()
+    output.write(processed_content.encode('utf-8'))
+    st.download_button(
+        label="처리된 텍스트 다운로드",
+        data=output.getvalue(),
+        file_name="processed_text.txt",
+        mime="text/plain"
+    )
