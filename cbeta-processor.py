@@ -28,9 +28,6 @@ input_option = st.radio(
 
 if input_option == '텍스트 직접 입력':
     content = st.text_area("텍스트를 입력하세요:", height=200)
-    if content:
-        st.subheader("입력된 텍스트:")
-        st.text_area("", content, height=200)
 else:
     uploaded_file = st.file_uploader("텍스트 파일을 선택하세요", type=['txt'])
     if uploaded_file is not None:
