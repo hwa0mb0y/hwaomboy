@@ -28,17 +28,12 @@ input_option = st.radio(
 
 if input_option == '텍스트 직접 입력':
     content = st.text_area("텍스트를 입력하세요:", height=200)
-    if content:
-        st.subheader("입력된 텍스트:")
-        st.text_area("", content, height=200)
 else:
     uploaded_file = st.file_uploader("텍스트 파일을 선택하세요", type=['txt'])
     if uploaded_file is not None:
         content = uploaded_file.getvalue().decode("utf-8")
-        st.subheader("파일 내용:")
-        st.text_area("", content, height=200)
 
-if st.button('텍스트 처리') and 'content' in locals():
+if st.button('텍스트 처리') and 'content' in locals() and content.strip():
     processed_content = process_text(content)
     
     st.subheader("처리된 텍스트:")
@@ -60,8 +55,8 @@ if st.button('텍스트 처리') and 'content' in locals():
     # 클립보드에 복사 버튼 (Streamlit 방식)
     with col2:
         if st.button('복사하기'):
-            st.write('텍스트가 클립보드에 복사되었습니다!')
             st.code(processed_content)  # 이렇게 하면 'Copy to clipboard' 버튼이 자동으로 생성됩니다
-    
-    st.info("처리된 텍스트를 복사하려면 '복사하기' 버튼을 클릭한 후, 나타나는 코드 블록의 'Copy to clipboard' 버튼을 사용하세요.")
-    
+            st.success('위의 코드 블록에서 "Copy to clipboard" 버튼을 클릭하여 텍스트를 복사하세요.')
+
+else:
+    st.info("텍스트를 입력하거나 파일을 업로드한 후 '텍스트 처리' 버튼을 클릭하세요.")
