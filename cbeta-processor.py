@@ -54,9 +54,9 @@ if st.button('텍스트 처리') and 'content' in locals() and content.strip():
     
     # 클립보드에 복사 버튼 (Streamlit 방식)
     with col2:
-        if st.button('복사하기'):
-            st.code(processed_content)  # 이렇게 하면 'Copy to clipboard' 버튼이 자동으로 생성됩니다
-            st.success('위의 코드 블록에서 "Copy to clipboard" 버튼을 클릭하여 텍스트를 복사하세요.')
+        # if st.button('복사하기'):
+        st.code(processed_content)  # 이렇게 하면 'Copy to clipboard' 버튼이 자동으로 생성됩니다
+        st.success('위의 코드 블록에서 "Copy to clipboard" 버튼을 클릭하여 텍스트를 복사하세요.')
 
 else:
     st.info("텍스트를 입력하거나 파일을 업로드한 후 '텍스트 처리' 버튼을 클릭하세요.")
