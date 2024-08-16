@@ -6,7 +6,7 @@ def process_text(content):
     replace_chars = ['，', '、', '？', '：', '；', '。', '「', '」', '《', '》']
     
     # 대체할 문자 딕셔너리
-    replace_dict = {'教': '敎', '為': '爲', '即': '卽', '眾': '衆'}
+    replace_dict = {'眾': '衆', '教': '敎', '為': '爲', '即': '卽'}
     
     # 리스트의 문자들을 공백으로 대체
     for char in replace_chars:
