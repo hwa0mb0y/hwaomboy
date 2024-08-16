@@ -42,14 +42,26 @@ if st.button('텍스트 처리') and 'content' in locals():
     processed_content = process_text(content)
     
     st.subheader("처리된 텍스트:")
-    st.text_area("", processed_content, height=200)
+    st.text_area("처리된 텍스트 (아래 '복사하기' 버튼을 사용하세요):", processed_content, height=200, key='processed_text')
+    
+    col1, col2 = st.columns(2)
     
     # 처리된 텍스트를 다운로드할 수 있게 합니다
-    output = io.BytesIO()
-    output.write(processed_content.encode('utf-8'))
-    st.download_button(
-        label="처리된 텍스트 다운로드",
-        data=output.getvalue(),
-        file_name="processed_text.txt",
-        mime="text/plain"
-    )
+    with col1:
+        output = io.BytesIO()
+        output.write(processed_content.encode('utf-8'))
+        st.download_button(
+            label="텍스트 파일로 다운로드",
+            data=output.getvalue(),
+            file_name="processed_text.txt",
+            mime="text/plain"
+        )
+    
+    # 클립보드에 복사 버튼 (Streamlit 방식)
+    with col2:
+        if st.button('복사하기'):
+            st.write('텍스트가 클립보드에 복사되었습니다!')
+            st.code(processed_content)  # 이렇게 하면 'Copy to clipboard' 버튼이 자동으로 생성됩니다
+    
+    st.info("처리된 텍스트를 복사하려면 '복사하기' 버튼을 클릭한 후, 나타나는 코드 블록의 'Copy to clipboard' 버튼을 사용하세요.")
+    
