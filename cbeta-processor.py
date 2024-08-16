@@ -30,34 +30,35 @@ input_option = st.radio(
     ('텍스트 직접 입력', '파일 업로드')
 )
 
+input_option = st.radio(
+    "입력 방식을 선택하세요:",
+    ('텍스트 직접 입력', '파일 업로드')
+)
+
 if input_option == '텍스트 직접 입력':
     content = st.text_area("텍스트를 입력하세요:", height=200)
+    if content:
+        st.subheader("입력된 텍스트:")
+        st.text_area("", content, height=200)
 else:
     uploaded_file = st.file_uploader("텍스트 파일을 선택하세요", type=['txt'])
     if uploaded_file is not None:
         content = uploaded_file.getvalue().decode("utf-8")
+        st.subheader("파일 내용:")
+        st.text_area("", content, height=200)
 
-if st.button('텍스트 처리') and 'content' in locals() and content.strip():
-    st.session_state.processed_content = process_text(content)
-
-if st.session_state.processed_content:
+if st.button('텍스트 처리') and 'content' in locals():
+    processed_content = process_text(content)
+    
     st.subheader("처리된 텍스트:")
-    st.text_area("처리된 텍스트:", st.session_state.processed_content, height=200, key='processed_text')
+    st.text_area("", processed_content, height=200)
     
     # 처리된 텍스트를 다운로드할 수 있게 합니다
     output = io.BytesIO()
-    output.write(st.session_state.processed_content.encode('utf-8'))
+    output.write(processed_content.encode('utf-8'))
     st.download_button(
-        label="텍스트 파일로 다운로드",
+        label="처리된 텍스트 다운로드",
         data=output.getvalue(),
         file_name="processed_text.txt",
         mime="text/plain"
     )
-    
-    # 클립보드에 복사 기능
-    if st.button('텍스트 복사'):
-        clipboard.copy(st.session_state.processed_content)
-        st.success('텍스트가 클립보드에 복사되었습니다.')
-
-else:
-    st.info("텍스트를 입력하거나 파일을 업로드한 후 '텍스트 처리' 버튼을 클릭하세요.")
