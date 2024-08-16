@@ -37,24 +37,25 @@ if st.button('텍스트 처리') and 'content' in locals() and content.strip():
     processed_content = process_text(content)
     
     st.subheader("처리된 텍스트:")
-    st.text_area("처리된 텍스트 (아래 '복사하기' 버튼을 사용하세요):", processed_content, height=200, key='processed_text')
+    st.code(processed_content)
+    # st.text_area("처리된 텍스트 (아래 '복사하기' 버튼을 사용하세요):", processed_content, height=200, key='processed_text')
     
-    col1, col2 = st.columns(2)
+    # col1, col2 = st.columns(2)
     
-    # 처리된 텍스트를 다운로드할 수 있게 합니다
-    output = io.BytesIO()
-    output.write(processed_content.encode('utf-8'))
-    st.download_button(
-        label="텍스트 파일로 다운로드",
-        data=output.getvalue(),
-        file_name="processed_text.txt",
-        mime="text/plain"
-    )
+    # # 처리된 텍스트를 다운로드할 수 있게 합니다
+    # output = io.BytesIO()
+    # output.write(processed_content.encode('utf-8'))
+    # st.download_button(
+    #     label="텍스트 파일로 다운로드",
+    #     data=output.getvalue(),
+    #     file_name="processed_text.txt",
+    #     mime="text/plain"
+    # )
     
-    # 클립보드에 복사 기능
-    if st.button('텍스트 복사'):
-        st.code(processed_content)
-        st.success('위의 코드 블록에서 "Copy" 버튼을 클릭하여 텍스트를 복사하세요.')
+    # # 클립보드에 복사 기능
+    # if st.button('텍스트 복사'):
+    #     st.code(processed_content)
+    #     st.success('위의 코드 블록에서 "Copy" 버튼을 클릭하여 텍스트를 복사하세요.')
 
 else:
     st.info("텍스트를 입력하거나 파일을 업로드한 후 '텍스트 처리' 버튼을 클릭하세요.")
