@@ -21,9 +21,6 @@ def process_text(content):
 st.title('CBETA 텍스트 처리')
 st.text("이 앱은 CBETA 등의 텍스트를 입력받아서 표점 부호를 빈칸으로 바꾸고 중국/일본식 한자를 한국식 한자로 바꿉니다.")
 
-# 세션 상태 초기화
-if 'processed_content' not in st.session_state:
-    st.session_state.processed_content = None
 
 input_option = st.radio(
     "입력 방식을 선택하세요:",
