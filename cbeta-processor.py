@@ -3,7 +3,7 @@ import io
 
 def process_text(content):
     # 대체할 문자 리스트
-    replace_chars = ['，', '、', '？', '：', '。', '「', '」', '《', '》']
+    replace_chars = ['，', '、', '？', '：', '；', '。', '「', '」', '《', '》']
     
     # 대체할 문자 딕셔너리
     replace_dict = {'教': '敎', '為': '爲', '即': '卽'}
