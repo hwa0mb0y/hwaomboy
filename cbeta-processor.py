@@ -18,7 +18,8 @@ def process_text(content):
     
     return content
 
-st.title('CBETA 텍스트 처리 애플리케이션')
+st.title('CBETA 텍스트 처리')
+st.text("이 앱은 CBETA 등의 텍스트를 입력받아서 표점 부호를 빈칸으로 바꾸고 중국/일본식 한자를 한국식 한자로 바꿉니다.")
 
 input_option = st.radio(
     "입력 방식을 선택하세요:",
